@@ -6,7 +6,7 @@
 #    By: tdubois <tdubois@student.42angouleme.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/21 00:19:04 by tdubois           #+#    #+#              #
-#    Updated: 2023/01/24 09:03:01 by tdubois          ###   ########.fr        #
+#    Updated: 2023/01/24 09:53:17 by tdubois          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,8 @@ SRCS	:=	$(shell find src -name '*.c')
 
 #TARGETS
 NAME	:=	1h1p
-OBJS	:=	$(SRCS:src/%.c=build/%.o)
-DEPS	:=	$(SRCS:src/%.c=build/%.d)
+OBJS	:=	$(SRCS:%.c=build/%.o)
+DEPS	:=	$(SRCS:%.c=build/%.d)
 DIRS	:=	$(sort $(shell dirname $(OBJS)))
 
 ################################################################################
@@ -80,7 +80,7 @@ $(NAME): $(OBJS)
 $(DIRS):
 	mkdir -p $@;
 
-$(OBJS): build/%.o: src/%.c | $$(@D)
+$(OBJS): build/%.o: %.c | $$(@D)
 	$(CC) $(CFLAGS) -c $(CPPFLAGS) $< -o $@;
 
 -include $(DEPS)
