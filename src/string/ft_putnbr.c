@@ -6,7 +6,7 @@
 /*   By: tdubois <tdubois@student.42angouleme.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 19:30:14 by tdubois           #+#    #+#             */
-/*   Updated: 2023/01/24 08:10:50 by tdubois          ###   ########.fr       */
+/*   Updated: 2023/01/24 08:23:15 by tdubois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_putnbr(int n)
 	{
 		ft_putchar('-');
 		leading_digits *= -1;
-		last_digit += -1;
+		last_digit *= -1;
 	}
 	if (leading_digits > 0)
 		ft_putnbr(leading_digits);

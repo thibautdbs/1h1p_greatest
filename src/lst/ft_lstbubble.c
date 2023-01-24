@@ -6,7 +6,7 @@
 /*   By: tdubois <tdubois@student.42angouleme.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 17:50:13 by tdubois           #+#    #+#             */
-/*   Updated: 2023/01/22 17:57:43 by tdubois          ###   ########.fr       */
+/*   Updated: 2023/01/24 08:18:38 by tdubois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	ft_lstbubble(t_lst **plst, int content)
 	while (i > 0)
 	{
 		ft_lstrotate(plst);
-		i++;
+		i--;
 	}
 }
