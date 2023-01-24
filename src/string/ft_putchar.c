@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdubois <tdubois@student.42angouleme.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/22 19:30:14 by tdubois           #+#    #+#             */
-/*   Updated: 2023/01/24 08:10:50 by tdubois          ###   ########.fr       */
+/*   Created: 2023/01/24 08:10:06 by tdubois           #+#    #+#             */
+/*   Updated: 2023/01/24 08:10:41 by tdubois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "1h1p/ft_string.h"
 
-void	ft_putnbr(int n)
-{
-	int	leading_digits;
-	int	last_digit;
+#include <unistd.h>//write
 
-	leading_digits = n / 10;
-	last_digit = n % 10;
-	if (n < 0)
-	{
-		ft_putchar('-');
-		leading_digits *= -1;
-		last_digit += -1;
-	}
-	if (leading_digits > 0)
-		ft_putnbr(leading_digits);
-	ft_putchar(last_digit + '0');
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
 }
