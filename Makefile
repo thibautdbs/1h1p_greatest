@@ -6,7 +6,7 @@
 #    By: tdubois <tdubois@student.42angouleme.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/21 00:19:04 by tdubois           #+#    #+#              #
-#    Updated: 2023/01/21 00:49:13 by tdubois          ###   ########.fr        #
+#    Updated: 2023/01/24 09:03:01 by tdubois          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,8 +64,8 @@ refast: fclean fast
 ################################################################################
 ### FLAGS
 
-CC			:=	clang
-CFLAGS		:=	-Wall -Wextra -Werror -O3
+CC			:=	gcc
+CFLAGS		:=	-Wall -Wextra -Wno-unused-result -Werror -O3
 CPPFLAGS	:=	-MP -MMD -Iinclude
 
 ################################################################################
