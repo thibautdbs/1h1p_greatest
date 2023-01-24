@@ -6,7 +6,7 @@
 /*   By: tdubois <tdubois@student.42angouleme.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 17:12:06 by tdubois           #+#    #+#             */
-/*   Updated: 2023/01/22 19:28:47 by tdubois          ###   ########.fr       */
+/*   Updated: 2023/01/24 08:00:35 by tdubois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 int	main(int argc, char **argv)
 {
 	t_lst	*nbrs;
-	int	i;
+	int		i;
 
 	nbrs = NULL;
 	if (argc < 1)

@@ -6,7 +6,7 @@
 /*   By: tdubois <tdubois@student.42angouleme.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 18:48:03 by tdubois           #+#    #+#             */
-/*   Updated: 2023/01/22 19:16:37 by tdubois          ###   ########.fr       */
+/*   Updated: 2023/01/24 08:00:18 by tdubois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_atoi(char const *nptr)
 	n = 0;
 	while (ft_isdigit(*nptr))
 	{
-		if (n >= (LONG_MAX - (*nptr -'0')) / 10)
+		if (n >= (LONG_MAX - (*nptr - '0')) / 10)
 		{
 			if (sign == 1)
 				return ((int)LONG_MAX);
@@ -56,7 +56,7 @@ static int	ft_strspn(char const *str, char const *accept)
 	int	i;
 
 	i = 0;
-	while (str[i] != '\0' && ft_strchr((char*)accept, str[i]) != NULL)
+	while (str[i] != '\0' && ft_strchr((char *)accept, str[i]) != NULL)
 		i++;
 	return (i);
 }
@@ -66,7 +66,7 @@ static char	*ft_strchr(char const *str, char c)
 	while (*str != '\0')
 	{
 		if (*str == c)
-			return ((char*)str);
+			return ((char *)str);
 		str++;
 	}
 	return (NULL);
