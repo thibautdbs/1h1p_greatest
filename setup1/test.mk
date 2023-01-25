@@ -6,7 +6,7 @@
 #    By: tdubois <tdubois@student.42angouleme.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/24 09:24:04 by tdubois           #+#    #+#              #
-#    Updated: 2023/01/25 21:59:19 by tdubois          ###   ########.fr        #
+#    Updated: 2023/01/25 22:19:40 by tdubois          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,14 @@ TDIRS	:=	$(sort $(shell dirname $(TOBJS)))
 ################################################################################
 ### CMDS
 
+test: VALGRIND	:=	valgrind					\
+						--quiet					\
+						--leak-check=full		\
+						--show-reachable=yes	\
+						--error-exitcode=1		\
+
 test: test.build
-	@./run_tests;
+	@$(VALGRIND) ./run_tests;
 .PHONY: test
 
 test.build:
