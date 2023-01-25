@@ -6,7 +6,7 @@
 #    By: tdubois <tdubois@student.42angouleme.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/24 09:24:04 by tdubois           #+#    #+#              #
-#    Updated: 2023/01/24 10:10:25 by tdubois          ###   ########.fr        #
+#    Updated: 2023/01/25 21:59:19 by tdubois          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,9 @@ test.clean:
 	@rm -rf $(NAME);
 	@rm -rf $(TRUNNER);
 .PHONY: test.clean
+
+#overload flcean to clean test files
+fclean: test.clean
 
 test.re: test.clean test
 .PHONY: test.re
