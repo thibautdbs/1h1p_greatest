@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+SRC="${1}";
+
+if [[ ! -f "${SRC}" ]]; then
+	echo "mkmain: '${SRC}' doesn't exist.";
+	exit 1;
+fi
+
+B="[[:blank:]]";
+NB="[^[:blank:]]";
+PATTERN="^SUITE${B}*\(${B}*(${NB}+)${B}*\)";
+
+cat << EOF
+#include "greatest/greatest.h"
+
+$(sed -nr "s/${PATTERN}/extern SUITE(\1);/p" "${SRC}")
+
+GREATEST_MAIN_DEFS();
+int main(int argc, char **argv)
+{
+	GREATEST_MAIN_BEGIN();
+	$(sed -nr "s/${PATTERN}/RUN_SUITE(\1);/p" "${SRC}")
+	GREATEST_MAIN_END();
+}
+EOF

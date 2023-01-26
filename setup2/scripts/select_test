@@ -1,0 +1,107 @@
+#!/usr/bin/env bash
+
+my::assert_command_exists()
+{
+	if ! type "${1}" >&/dev/null; then
+		echo "select_test: \`${1}\` command doesn't exist." >&2;
+		exit 1;
+	fi
+}
+
+my::get_sourcefile()
+{
+	echo "${1}" | sed -re 's|^build/(.*)\.out$|\1.c|';
+}
+
+my::select_runner()
+{
+	declare RUNNERS;
+	declare PREVIEWCMD;
+
+	export -f my::get_sourcefile;
+	PREVIEWCMD="my::get_sourcefile {} | xargs cat";
+
+	RUNNERS=$(find build/tests -executable -name '*.out');
+	echo "${RUNNERS}"					\
+		| SHELL=bash fzf				\
+			--header='Select runner:'	\
+			--layout=reverse			\
+			--preview="${PREVIEWCMD}";
+}
+
+my::preview_breakpoint()
+{
+	declare SOURCE;
+	declare BREAKPOINT;
+
+	SOURCE=${1};
+	BREAKPOINT=${2};
+
+	read -r -d '' AWKSCRIPT <<- EOF
+		/^(TEST|SUITE).*${BREAKPOINT}/ {
+			var=1;
+		}
+
+		var {
+			print;
+		}
+
+		 var && /^}/ {
+			exit;
+		}
+	EOF
+
+	awk "${AWKSCRIPT}" "${SOURCE}";
+}
+
+my::select_breakpoint()
+{
+	declare RUNNER;
+	declare SOURCE;
+
+	RUNNER=${1};
+	SOURCE=$(my::get_sourcefile "${RUNNER}");
+
+	export -f my::preview_breakpoint;
+	PREVIEWCMD="my::preview_breakpoint '${SOURCE}' {}";
+
+	read -r -d '' BREAKPOINTS <<- EOF
+		$("${RUNNER}" -l | sed -rn 's|^\* Suite (.+):$|\1|p')
+		$("${RUNNER}" -l | sed -rn 's|^  (.+)$|\1|p')
+	EOF
+
+	echo "${BREAKPOINTS}"					\
+		| SHELL=bash fzf					\
+			--header='Select breakpoint:'	\
+			--layout=reverse				\
+			--preview="${PREVIEWCMD}";
+}
+
+my::main()
+{
+	declare RUNNER;
+	declare BREAKPOINT;
+
+	my::assert_command_exists fzf;
+	if [[ "${1}" == '--gdb' ]]; then
+		my::assert_command_exists gdb;
+	fi
+	RUNNER=$(my::select_runner);
+	if [[ -z "${RUNNER}" ]]; then
+		exit 1;
+	fi
+	BREAKPOINT=$(my::select_breakpoint "${RUNNER}");
+	if [[ -z "${BREAKPOINT}" ]]; then
+		exit 1;
+	fi
+	if [[ "${1}" == '--gdb' ]]; then
+		</dev/tty gdb "${RUNNER}"			\
+			--tui							\
+			-ex "break ${BREAKPOINT}"		\
+			-ex "run -e ${BREAKPOINT}";
+	else
+		"${RUNNER}" -e "${BREAKPOINT}";
+	fi
+}
+
+my::main "${@}";
