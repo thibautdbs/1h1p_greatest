@@ -6,7 +6,7 @@
 /*   By: tdubois <tdubois@student.42angouleme.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 10:10:17 by tdubois           #+#    #+#             */
-/*   Updated: 2023/01/27 10:13:49 by tdubois          ###   ########.fr       */
+/*   Updated: 2023/01/27 11:40:07 by tdubois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_lst	*ft_lstcreate_from_arr(char **arr, int size)
 	t_lst	*lst;
 
 	lst = NULL;
-	i = 1;
+	i = 0;
 	while (i < size)
 	{
 		ft_lstadd_back(&lst, ft_lstcreate(ft_atoi(arr[i])));
