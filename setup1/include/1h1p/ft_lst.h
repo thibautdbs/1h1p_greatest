@@ -6,7 +6,7 @@
 /*   By: tdubois <tdubois@student.42angouleme.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 00:14:20 by tdubois           #+#    #+#             */
-/*   Updated: 2023/01/24 08:06:35 by tdubois          ###   ########.fr       */
+/*   Updated: 2023/01/27 10:13:56 by tdubois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct s_lst
 
 t_lst	*ft_lstcreate(int content);
 void	ft_lstdestroy(t_lst **plst);
+
+t_lst	*ft_lstcreate_from_arr(char **arr, int size);
 
 void	ft_lstadd_front(t_lst **plst, t_lst *new);
 void	ft_lstadd_back(t_lst **plst, t_lst *new);
