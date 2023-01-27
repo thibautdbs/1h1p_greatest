@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   runner.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdubois <tdubois@student.42angouleme.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/22 17:12:06 by tdubois           #+#    #+#             */
-/*   Updated: 2023/01/27 11:43:34 by tdubois          ###   ########.fr       */
+/*   Created: 2023/01/24 09:20:28 by tdubois           #+#    #+#             */
+/*   Updated: 2023/01/27 11:35:05 by tdubois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "1h1p/ft_lst.h"
+#include "greatest/greatest.h"
 
-#include <errno.h>//errno
-#include <stddef.h>//NULL
+extern SUITE(test_atoi);
+extern SUITE(test_lstpop_back);
+extern SUITE(test_lstpop_front);
+extern SUITE(test_lstbubble);
+extern SUITE(test_lstcreate_from_arr);
 
-#include "1h1p/ft_string.h"
-
+GREATEST_MAIN_DEFS();
 int	main(int argc, char **argv)
 {
-	t_lst	*nbrs;
+	GREATEST_MAIN_BEGIN();
 
-	if (argc < 1)
-		return (1);
-	errno = 0;
-	nbrs = ft_lstcreate_from_arr(argv + 1, argc - 1);
-	if (errno == 0)
-	{
-		ft_lstbubble(&nbrs, ft_lstmin(nbrs));
-		ft_lstdisplay(nbrs);
-	}
-	ft_lstdestroy(&nbrs);
-	return (errno);
+    RUN_SUITE(test_atoi);
+	RUN_SUITE(test_lstpop_back);
+	RUN_SUITE(test_lstpop_front);
+	RUN_SUITE(test_lstbubble);
+	RUN_SUITE(test_lstcreate_from_arr);
+
+	GREATEST_MAIN_END();
 }
