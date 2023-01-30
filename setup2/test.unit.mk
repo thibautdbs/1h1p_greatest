@@ -6,7 +6,7 @@
 #    By: tdubois <tdubois@student.42angouleme.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/24 09:24:04 by tdubois           #+#    #+#              #
-#    Updated: 2023/01/26 01:51:00 by tdubois          ###   ########.fr        #
+#    Updated: 2023/01/30 07:56:58 by tdubois          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,14 +39,6 @@ test.unit.log:
 	-@find build/tests -name '*.log' | xargs -r -L1 cat;
 .PHONY: test.unit.log
 
-test.unit.select:
-	@. scripts/select_test;
-.PHONY: test.unit.select
-
-test.unit.gdb:
-	@. scripts/select_test --gdb;
-.PHONY: test.unit.gdb
-
 test.unit.clean:
 	@rm -rf build;
 	@rm -rf $(NAME);
@@ -57,6 +49,17 @@ fclean: test.unit.clean
 
 test.unit.re: test.unit.clean test.unit
 .PHONY: test.unit.re
+
+### FZF
+test.unit.select test.unit.gdb: export PATH := $(abspath bin):$(PATH)
+
+test.unit.select:
+	@. scripts/select_test;
+.PHONY: test.unit.select
+
+test.unit.gdb:
+	@. scripts/select_test --gdb;
+.PHONY: test.unit.gdb
 
 ################################################################################
 ### TDIRS TARGET
